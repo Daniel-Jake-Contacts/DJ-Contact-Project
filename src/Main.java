@@ -85,7 +85,8 @@ public class Main {
         List<String> list = Files.readAllLines(filepath);
 
         for(String contact:list) {
-            if (contact.contains(search)) {
+            String lowerCont = contact.toLowerCase();
+            if (lowerCont.contains(search.toLowerCase())) {
                 System.out.println(contact);
             }
         }
