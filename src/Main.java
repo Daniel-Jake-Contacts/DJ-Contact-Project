@@ -12,23 +12,25 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Scanner scname = new Scanner(System.in);
         Scanner scnum = new Scanner(System.in);
-        int choice = sc.nextInt();
+
         String directory = "data";
         String fileName = "contacts.txt";
 
 
 
-        System.out.println("What would you like to do?");
-        System.out.println();
-        System.out.println("1. View Contacts");
-        System.out.println("2. Add Contacts");
-        System.out.println("3. Search Contacts");
-        System.out.println("4. Delete Contacts");
-        System.out.println("5. Exit");
-        System.out.println();
-        System.out.print(">");
 
+        int choice;
         do {
+            System.out.println("What would you like to do?");
+            System.out.println();
+            System.out.println("1. View Contacts");
+            System.out.println("2. Add Contacts");
+            System.out.println("3. Search Contacts");
+            System.out.println("4. Delete Contacts");
+            System.out.println("5. Exit");
+            System.out.println();
+            System.out.print(">");
+            choice = sc.nextInt();
             System.out.println();
             if (choice == 1) {
                 readLines(directory, fileName);
