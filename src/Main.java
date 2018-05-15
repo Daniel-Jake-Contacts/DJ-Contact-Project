@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class Main {
         Scanner scname = new Scanner(System.in);
         Scanner scnum = new Scanner(System.in);
         Scanner scsearch = new Scanner(System.in);
+        Scanner scdel = new Scanner(System.in);
 
         String directory = "data";
         String fileName = "contacts.txt";
@@ -55,6 +57,11 @@ public class Main {
                 searchContacts(directory, fileName, search);
                 System.out.println("----------------------------");
             } else if (choice == 4) {
+                String delete;
+                System.out.println("Enter name of contact you would like to delete");
+                System.out.print(">");
+                delete = scdel.nextLine();
+                deleteContact(directory,fileName,delete);
 
             } else if (choice == 5) {
 
@@ -90,5 +97,9 @@ public class Main {
                 System.out.println(contact);
             }
         }
+    }
+
+    private static void deleteContact(String dir, String file, String delete) throws IOException {
+
     }
 }
