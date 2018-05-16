@@ -33,8 +33,8 @@ public class Main {
             choice = sc.nextInt();
             System.out.println();
             if (choice == 1) {
-                System.out.println("Name | Number");
-                System.out.println("-=-=-=-=-=-=-=-=-=-=-");
+                System.out.println("Name         |  Number");
+                System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                 readLines(directory, fileName);
                 System.out.println("----------------------------");
             } else if (choice == 2) {
@@ -47,7 +47,7 @@ public class Main {
                 System.out.println("What is the contacts number");
                 System.out.print(">");
                 number = scnum.nextLine();
-                num.add(name + " | " + number);
+                num.add(name + " - " + number);
                 addContact(num, directory, fileName);
                 System.out.println("Contact added");
                 System.out.println("----------------------------");
@@ -83,10 +83,29 @@ public class Main {
     private static void readLines(String dir,String file) throws IOException {
         Path filepath = Paths.get(dir,file);
         List<String> list = Files.readAllLines(filepath);
+        List<String> names = new ArrayList<>();
+        List<String> phones = new ArrayList<>();
+        String contactName = "";
+        String contactNumber = "";
 
         for(String contact:list) {
-            System.out.println(contact);
+            String[] parts  = contact.split(" - ");
+            names.add(parts[0]);
+            phones.add(parts[1]);
+            for (String name:names){
+                contactName = name;
+            }
+            for (String phone:phones){
+                contactNumber = phone;
+            }
+            if (contactName.length() < 8){
+                System.out.println(contactName + "\t\t" + " | " + "\t" + contactNumber);
+            } else {
+                System.out.println(contactName + "\t" + " | " + "\t" + contactNumber);
+            }
         }
+
+
     }
 
     private static void searchContacts(String dir, String file, String search) throws IOException {
