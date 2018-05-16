@@ -47,6 +47,11 @@ public class Main {
                 System.out.println("What is the contacts number");
                 System.out.print(">");
                 number = scnum.nextLine();
+                if(number.length()<=7){
+                    number = number.substring(0,3) + "-" + number.substring(3,number.length());
+                } else if(number.length()>7){
+                    number = "(" + number.substring(0,3) + ")-" + number.substring(3,6) + "-" +number.substring(6,number.length());
+                }
                 num.add(name + " - " + number);
                 addContact(num, directory, fileName);
                 System.out.println("Contact added");
