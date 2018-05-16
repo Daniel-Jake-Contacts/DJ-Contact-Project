@@ -100,6 +100,22 @@ public class Main {
     }
 
     private static void deleteContact(String dir, String file, String delete) throws IOException {
+        int del = -1;
+
+        Path filepath = Paths.get(dir, file);
+        List<String> list = Files.readAllLines(filepath);
+
+        for(String contact:list) {
+            String lowerCont = contact.toLowerCase();
+            if (lowerCont.contains(delete.toLowerCase())){
+                del = list.indexOf(contact);
+            }
+        }
+
+        list.remove(del);
+        Files.write(filepath,list);
+        System.out.println("Contact Deleted.");
 
     }
+
 }
