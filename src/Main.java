@@ -33,6 +33,8 @@ public class Main {
             choice = sc.nextInt();
             System.out.println();
             if (choice == 1) {
+                System.out.println("Name | Number");
+                System.out.println("-=-=-=-=-=-=-=-=-=-=-");
                 readLines(directory, fileName);
                 System.out.println("----------------------------");
             } else if (choice == 2) {
@@ -45,7 +47,7 @@ public class Main {
                 System.out.println("What is the contacts number");
                 System.out.print(">");
                 number = scnum.nextLine();
-                num.add(name + " - " + number);
+                num.add(name + " | " + number);
                 addContact(num, directory, fileName);
                 System.out.println("Contact added");
                 System.out.println("----------------------------");
