@@ -15,6 +15,7 @@ public class Main {
         Scanner scnum = new Scanner(System.in);
         Scanner scsearch = new Scanner(System.in);
         Scanner scdel = new Scanner(System.in);
+        Scanner scyn = new Scanner(System.in);
 
         String directory = "data";
         String fileName = "contacts.txt";
@@ -44,6 +45,20 @@ public class Main {
                 System.out.println("What is the contacts name");
                 System.out.print(">");
                 name = scname.nextLine();
+                Path filepath = Paths.get(directory,fileName);
+                List<String> list = Files.readAllLines(filepath);
+
+                for(String contact:list) {
+                    String lowerCont = contact.toLowerCase();
+                    if (lowerCont.contains(name.toLowerCase())) {
+                        System.out.println("This name already exists, would you like to override? [y/n]");
+                        System.out.print(">");
+                        String yn = scyn.nextLine();
+                        if("y".equalsIgnoreCase(yn)) {
+                            deleteContact(directory,fileName,name);
+                        }
+                    }
+                }
                 System.out.println("What is the contacts number");
                 System.out.print(">");
                 number = scnum.nextLine();
