@@ -16,7 +16,6 @@ public class Main {
         Scanner scsearch = new Scanner(System.in);
         Scanner scdel = new Scanner(System.in);
         Scanner scyn = new Scanner(System.in);
-
         String directory = "data";
         String fileName = "contacts.txt";
         int choice;
@@ -90,20 +89,17 @@ public class Main {
                 System.out.print(">");
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
-
             } else if (choice == 5) {
-
+                break;
             } else {
-                System.out.println("try again");
+                System.out.println("Try again");
             }
         }while(choice != 5);
-
     }
 
     public static void addContact(ArrayList<String> list, String dir, String file) throws IOException {
         Path filepath = Paths.get(dir,file);
         Files.write(filepath,list, StandardOpenOption.APPEND);
-
     }
 
     private static void readLines(String dir,String file) throws IOException {
@@ -130,8 +126,6 @@ public class Main {
                 System.out.println(contactName + "\t" + " | " + "\t" + contactNumber);
             }
         }
-
-
     }
 
     private static void searchContacts(String dir, String file, String search) throws IOException {
@@ -153,7 +147,6 @@ public class Main {
         List<String> names = new ArrayList<>();
         String contactName;
 
-
         Path filepath = Paths.get(dir, file);
         List<String> list = Files.readAllLines(filepath);
 
@@ -166,7 +159,6 @@ public class Main {
                     del = names.indexOf(contactName);
                 }
             }
-
         }
 
         System.out.println("Are you sure you want to delete " + list.get(del) + " [y/n]");
@@ -179,7 +171,5 @@ public class Main {
             System.out.println("Contact Deleted.");
             System.out.println();
         }
-
     }
-
 }
