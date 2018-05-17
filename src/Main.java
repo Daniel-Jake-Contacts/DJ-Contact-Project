@@ -51,11 +51,15 @@ public class Main {
                 for(String contact:list) {
                     String lowerCont = contact.toLowerCase();
                     if (lowerCont.contains(name.toLowerCase())) {
-                        System.out.println("This name already exists, would you like to override? [y/n]");
+                        System.out.println("This name already exists, would you like to overwrite? [y/n]");
                         System.out.print(">");
                         String yn = scyn.nextLine();
                         if("y".equalsIgnoreCase(yn)) {
                             deleteContact(directory,fileName,name);
+                        } else if ("n".equalsIgnoreCase(yn)){
+                            System.out.println("Make a change to the name");
+                            System.out.print(">");
+                            name = scname.nextLine();
                         }
                     }
                 }
@@ -80,7 +84,9 @@ public class Main {
                 System.out.println("----------------------------");
             } else if (choice == 4) {
                 String delete;
-                System.out.println("Enter name of contact you would like to delete");
+                System.out.println("Which contact would you like to delete");
+                System.out.println();
+                readLines(directory, fileName);
                 System.out.print(">");
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
@@ -142,20 +148,37 @@ public class Main {
 
     private static void deleteContact(String dir, String file, String delete) throws IOException {
         int del = -1;
+        Scanner scdelete = new Scanner (System.in);
+        String yesno;
+        List<String> names = new ArrayList<>();
+        String contactName;
+
 
         Path filepath = Paths.get(dir, file);
         List<String> list = Files.readAllLines(filepath);
 
         for(String contact:list) {
-            String lowerCont = contact.toLowerCase();
-            if (lowerCont.contains(delete.toLowerCase())){
-                del = list.indexOf(contact);
+            String[] parts  = contact.split(" - ");
+            names.add(parts[0]);
+            for (String name:names){
+                contactName = name;
+                if (name.equalsIgnoreCase(delete)){
+                    del = names.indexOf(contactName);
+                }
             }
+
         }
 
-        list.remove(del);
-        Files.write(filepath,list);
-        System.out.println("Contact Deleted.");
+        System.out.println("Are you sure you want to delete " + list.get(del) + " [y/n]");
+        System.out.print(">");
+        yesno = scdelete.nextLine();
+
+        if ("y".equalsIgnoreCase(yesno) || "yes".equalsIgnoreCase(yesno)){
+            list.remove(del);
+            Files.write(filepath,list);
+            System.out.println("Contact Deleted.");
+            System.out.println();
+        }
 
     }
 
