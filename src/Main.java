@@ -80,9 +80,9 @@ public class Main {
                 System.out.println("----------------------------");
             } else if (choice == 4) {
                 String delete;
-                System.out.println("Which contact would you like to delete");
+                System.out.println("Enter the full name of contact would you like to delete");
                 System.out.println();
-                readLines(directory, fileName);
+                displayFull(directory, fileName);
                 System.out.print(">");
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
@@ -100,6 +100,23 @@ public class Main {
         Files.write(filepath,list, StandardOpenOption.APPEND);
     }
 
+    private static void displayFull(String dir, String file) throws IOException{
+        Path filepath = Paths.get(dir,file);
+        List<String> list = Files.readAllLines(filepath);
+        List<String> names = new ArrayList<>();
+        String contactName = "";
+
+        Collections.sort(list);
+        for (String contact:list) {
+            String[] parts  = contact.split(" - ");
+            names.add(parts[0]);
+            for (String name:names){
+                contactName = name;
+            }
+            System.out.println(contactName);
+        }
+    }
+
     private static void readLines(String dir,String file) throws IOException {
         Path filepath = Paths.get(dir,file);
         List<String> list = Files.readAllLines(filepath);
@@ -110,7 +127,7 @@ public class Main {
         String contactName = "";
         String contactNumber = "";
         String firstName = "";
-        String lastName = "";
+        String lastName;
         String lastInitial = "";
 
         Collections.sort(list);
@@ -170,6 +187,7 @@ public class Main {
             names.add(parts[0]);
             for (String name:names){
                 contactName = name;
+
                 if (name.equalsIgnoreCase(delete)){
                     del = names.indexOf(contactName);
                 }
