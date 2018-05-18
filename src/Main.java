@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Scanner scname = new Scanner(System.in);
+        Scanner sclast = new Scanner(System.in);
         Scanner scnum = new Scanner(System.in);
         Scanner scsearch = new Scanner(System.in);
         Scanner scdel = new Scanner(System.in);
@@ -36,11 +37,17 @@ public class Main {
                 System.out.println("----------------------------");
             } else if (choice == 2) {
                 ArrayList<String> num = new ArrayList<>();
+                String first;
+                String last;
                 String name;
                 String number;
-                System.out.println("What is the contacts full name");
+                System.out.println("What is the contacts first name");
                 System.out.print(">");
-                name = scname.nextLine();
+                first = scname.nextLine();
+                System.out.println("What is the contacts last name");
+                System.out.print(">");
+                last = sclast.nextLine();
+                name = first + " " + last;
                 Path filepath = Paths.get(directory,fileName);
                 List<String> list = Files.readAllLines(filepath);
 
@@ -82,7 +89,7 @@ public class Main {
                 String delete;
                 displayFull(directory, fileName);
                 System.out.println();
-                System.out.println("Enter the name of the contact you want to delete exactly as it is spelled above");
+                System.out.println("Enter the name of the contact you want to delete EXACTLY as it is spelled above (nestor)");
                 System.out.print(">");
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
