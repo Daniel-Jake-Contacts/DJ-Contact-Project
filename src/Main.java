@@ -71,8 +71,10 @@ public class Main {
                 number = scnum.nextLine();
                 if(number.length()<=7){
                     number = number.substring(0,3) + "-" + number.substring(3,number.length());
-                } else if(number.length()>7){
+                } else if(number.length()>7 && number.length()<12){
                     number = "(" + number.substring(0,3) + ")-" + number.substring(3,6) + "-" +number.substring(6,number.length());
+                } else if(number.length()>=12){
+                    number = number;
                 }
                 num.add(name + " - " + number);
                 addContact(num, directory, fileName);
