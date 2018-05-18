@@ -87,6 +87,7 @@ public class Main {
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
             } else if (choice == 5) {
+                System.out.println("Goodbye!");
                 break;
             } else {
                 System.out.println("Try again");
@@ -104,8 +105,13 @@ public class Main {
         List<String> list = Files.readAllLines(filepath);
         List<String> names = new ArrayList<>();
         List<String> phones = new ArrayList<>();
+        List<String> firstNames = new ArrayList<>();
+        List<String> lastNames = new ArrayList<>();
         String contactName = "";
         String contactNumber = "";
+        String firstName = "";
+        String lastName = "";
+        String lastInitial = "";
 
         Collections.sort(list);
         for(String contact:list) {
@@ -113,7 +119,18 @@ public class Main {
             names.add(parts[0]);
             phones.add(parts[1]);
             for (String name:names){
-                contactName = name;
+                String [] fullNames = name.split(" ");
+                firstNames.add(fullNames[0]);
+                lastNames.add(fullNames[1]);
+
+                for (String first:firstNames){
+                    firstName = first;
+                }
+                for (String last:lastNames){
+                    lastName = last;
+                    lastInitial = lastName.substring(0, 1);
+                }
+                contactName = firstName + " " + lastInitial;
             }
             for (String phone:phones){
                 contactNumber = phone;
