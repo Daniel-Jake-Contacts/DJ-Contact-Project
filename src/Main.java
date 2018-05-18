@@ -38,7 +38,7 @@ public class Main {
                 ArrayList<String> num = new ArrayList<>();
                 String name;
                 String number;
-                System.out.println("What is the contacts name");
+                System.out.println("What is the contacts full name");
                 System.out.print(">");
                 name = scname.nextLine();
                 Path filepath = Paths.get(directory,fileName);
@@ -80,9 +80,9 @@ public class Main {
                 System.out.println("----------------------------");
             } else if (choice == 4) {
                 String delete;
-                System.out.println("Enter the full name of contact would you like to delete");
-                System.out.println();
                 displayFull(directory, fileName);
+                System.out.println();
+                System.out.println("Enter the name of the contact you want to delete exactly as it is spelled above");
                 System.out.print(">");
                 delete = scdel.nextLine();
                 deleteContact(directory,fileName,delete);
@@ -178,31 +178,42 @@ public class Main {
         String yesno;
         List<String> names = new ArrayList<>();
         String contactName;
+        String tryagain = "yes";
 
         Path filepath = Paths.get(dir, file);
         List<String> list = Files.readAllLines(filepath);
 
-        for(String contact:list) {
-            String[] parts  = contact.split(" - ");
-            names.add(parts[0]);
-            for (String name:names){
-                contactName = name;
+        do {
 
-                if (name.equalsIgnoreCase(delete)){
-                    del = names.indexOf(contactName);
+            for (String contact : list) {
+                String[] parts = contact.split(" - ");
+                names.add(parts[0]);
+                for (String name : names) {
+                    contactName = name;
+                    if (name.equalsIgnoreCase(delete)) {
+                        del = names.indexOf(contactName);
+                    }
                 }
             }
-        }
 
-        System.out.println("Are you sure you want to delete " + list.get(del) + " [y/n]");
-        System.out.print(">");
-        yesno = scdelete.nextLine();
+            if (names.indexOf(delete) == -1) {
+                System.out.println("That name isn't here. Try again");
+                break;
+            }
 
-        if ("y".equalsIgnoreCase(yesno) || "yes".equalsIgnoreCase(yesno)){
-            list.remove(del);
-            Files.write(filepath,list);
-            System.out.println("Contact Deleted.");
-            System.out.println();
-        }
+            System.out.println("Are you sure you want to delete " + list.get(del) + " [y/n]");
+            System.out.print(">");
+            yesno = scdelete.nextLine();
+
+            if ("y".equalsIgnoreCase(yesno) || "yes".equalsIgnoreCase(yesno)) {
+                list.remove(del);
+                Files.write(filepath, list);
+                System.out.println("Contact Deleted.");
+                System.out.println();
+                tryagain = "no";
+            } else {
+                break;
+            }
+        } while (tryagain.equalsIgnoreCase("yes"));
     }
 }
